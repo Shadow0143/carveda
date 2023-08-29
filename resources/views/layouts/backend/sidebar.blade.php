@@ -29,13 +29,19 @@
         <!-- Cards -->
 
         <li
-            class="menu-item @if( Route::currentRouteName() == 'aboutMeList' || Route::currentRouteName() == 'aboutMeAdd' ||Route::currentRouteName() == 'aboutMeEdit' || Route::currentRouteName() == 'servicesList' || Route::currentRouteName() == 'servicesAdd'  || Route::currentRouteName() == 'servicesEdit' || Route::currentRouteName() == 'worksList' || Route::currentRouteName() == 'worksAdd'  || Route::currentRouteName() == 'worksEdit' ||  Route::currentRouteName() == 'blogsList' || Route::currentRouteName() == 'blogsAdd'  || Route::currentRouteName() == 'blogsEdit'   )  open active @endif">
+            class="menu-item @if( Route::currentRouteName() == 'aboutMeList' || Route::currentRouteName() == 'aboutMeAdd' ||Route::currentRouteName() == 'aboutMeEdit' || Route::currentRouteName() == 'servicesList' || Route::currentRouteName() == 'servicesAdd'  || Route::currentRouteName() == 'servicesEdit' || Route::currentRouteName() == 'worksList' || Route::currentRouteName() == 'worksAdd'  || Route::currentRouteName() == 'worksEdit' ||  Route::currentRouteName() == 'blogsList' || Route::currentRouteName() == 'blogsAdd'  || Route::currentRouteName() == 'blogsEdit' ||   Route::currentRouteName() == 'categoryList' || Route::currentRouteName() == 'categoryAdd'  || Route::currentRouteName() == 'categoryEdit' )  open active @endif">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-cog"></i>
                 <div data-i18n="CMS">CMS</div>
             </a>
 
             <ul class="menu-sub">
+                <li
+                    class="menu-item   @if( Route::currentRouteName() == 'categoryList' || Route::currentRouteName() == 'categoryAdd'  || Route::currentRouteName() == 'categoryEdit') active @endif">
+                    <a href="{{ route('categoryList') }}" class="menu-link">
+                        <div data-i18n="hange site logo">Master Category</div>
+                    </a>
+                </li>
 
                 <li
                     class="menu-item  @if( Route::currentRouteName() == 'aboutMeList' || Route::currentRouteName() == 'aboutMeAdd'  ||Route::currentRouteName() == 'aboutMeEdit' ) active @endif ">
@@ -65,12 +71,7 @@
                     </a>
                 </li>
 
-                <li
-                    class="menu-item   @if( Route::currentRouteName() == 'categoryList' || Route::currentRouteName() == 'categoryAdd'  || Route::currentRouteName() == 'categoryEdit') active @endif">
-                    <a href="{{ route('categoryList') }}" class="menu-link">
-                        <div data-i18n="hange site logo">Master Category</div>
-                    </a>
-                </li>
+
 
             </ul>
         </li>

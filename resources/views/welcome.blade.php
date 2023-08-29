@@ -501,7 +501,8 @@
                                     src="{{ asset('blogsImage') }}/{{ $val->image }}" alt="feature image"
                                     class="img-fluid"></a>
                         </figure>
-                        <a href="#" class="small-btn-meta text-primary bg-primary-light">{{ $val->category }}</a>
+                        <a href="{{ route('blogwithCategory', ['slug' => $val->category_name]) }}"
+                            class="small-btn-meta text-primary bg-primary-light">{{ $val->category_name }}</a>
                         <a href="{{ route('blogDetails', ['id' => $val->id]) }}">
                             <h5 class="mt-3">S{{ $val->title }} </h5>
                         </a>

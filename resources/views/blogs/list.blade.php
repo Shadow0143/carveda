@@ -35,7 +35,7 @@
                             <i class="fab fa-bootstrap fa-lg text-primary me-3"></i> <strong>{{ $value->title
                                 }}</strong>
                         </td>
-                        <td>{{ $value->category }} </td>
+                        <td>{{ ucfirst($value->category_name) }} </td>
                         <td>
                             <ul class="list-unstyled">
 

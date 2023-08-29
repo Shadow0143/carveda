@@ -17,9 +17,10 @@
             <table class="table">
                 <thead>
                     <tr class="text-center">
+                        <th>Category</th>
                         <th>Title</th>
                         <th>Icon</th>
-                        {{-- <th>Short Description</th> --}}
+                        <th>Start price - End Price</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
@@ -27,6 +28,7 @@
                 <tbody class="table-border-bottom-0">
                     @forelse($services as $key => $value)
                     <tr id="willremove{{ $value->id }}" class="table-primary text-center">
+                        <td>{{ ucfirst($value->category_name) }}</td>
                         <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{ $value->title }}</strong>
                         </td>
                         <td>
@@ -40,8 +42,10 @@
                                 </a>
                             </ul>
                         </td>
+                        <td>
+                            {{ $value->start_price }} - {{ $value->end_price }}
+                        </td>
 
-                        {{-- <td>{{ $value->shortdescription }}</td> --}}
                         <td>
                             @if($value->status == 1)
                             <span class="badge bg-label-success me-1">Active</span>

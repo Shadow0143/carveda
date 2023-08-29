@@ -36,7 +36,7 @@
         <div class="row">
             <div class="col-xl-8">
                 <div class="blog-list-wrapper">
-                    @foreach ($blogs as $key=>$val)
+                    @forelse ($blogs as $key=>$val)
                     <div class="h2-blog-card bg-white p-0 mt-5">
                         <div class="feature-img position-relative overflow-hidden w-100 rounded-top">
 
@@ -46,8 +46,7 @@
                         </div>
                         <div class="h2-blog-card-content p-4">
                             <a href="{{ route('blogwithCategory', ['slug' => $val->category_name]) }}"
-                                class="btn-meta">{{
-                                $val->category_name }}</a>
+                                class="btn-meta">{{ $val->category_name }}</a>
                             <a href="{{ route('blogDetails', ['id' => $val->id]) }}
                                 " class="mt-3 d-block">
                                 <h3>{{ $val->title }}</h3>
@@ -63,7 +62,11 @@
                             </div>
                         </div>
                     </div>
-                    @endforeach
+                    @empty
+                    <div class="h2-blog-card bg-white p-0 mt-5 text-center">
+                        <h5 class="text-danger"> No Blog added for this category.</h5>
+                    </div>
+                    @endforelse
 
                 </div>
                 <div class="template-pagination mt-50">

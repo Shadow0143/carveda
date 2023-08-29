@@ -16,6 +16,29 @@
                 @if(!empty($blog))
                 <input type="hidden" name="id" id="id" value="{{ $blog->id }}">
                 @endif
+
+                <div class="mb-3">
+                    <label class="form-label" for="basic-icon-default-fullname">Category <span
+                            class="text-danger">*</span></label>
+                    <div class="input-group input-group-merge">
+                        <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                class="bx bx-money"></i></span>
+                        {{-- <input type="text" class="form-control" name="category" id="category"
+                            placeholder="Category" aria-label="John Doe" aria-describedby="basic-icon-default-fullname2"
+                            @if(!empty($blog)) value="{{ $blog->category }}" @endif required /> --}}
+                        <select name="category" id="category" class="form-control">
+                            <option value=""> --- Please Select Category --- </option>
+                            @foreach ($blogCategory as $key=>$val)
+                            <option value="{{ $val->id }}" @if(!empty($blog)) @if($blog->category == $val->id)
+                                selected
+                                @endif @endif
+
+                                >{{ $val->title }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
                 <div class="mb-3">
                     <label class="form-label" for="basic-icon-default-fullname">Title <span
                             class="text-danger">*</span></label>
@@ -28,17 +51,7 @@
                     </div>
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label" for="basic-icon-default-fullname">Category <span
-                            class="text-danger">*</span></label>
-                    <div class="input-group input-group-merge">
-                        <span id="basic-icon-default-fullname2" class="input-group-text"><i
-                                class="bx bx-money"></i></span>
-                        <input type="text" class="form-control" name="category" id="category" placeholder="Category"
-                            aria-label="John Doe" aria-describedby="basic-icon-default-fullname2" @if(!empty($blog))
-                            value="{{ $blog->category }}" @endif required />
-                    </div>
-                </div>
+
 
 
                 <div class="mb-3">
@@ -82,7 +95,7 @@
                     <div class="input-group input-group-merge">
                         <span id="basic-icon-default-message2" class="input-group-text"><i
                                 class="bx bx-comment"></i></span>
-                        <textarea id="small_description" class="form-control" name="small_description"
+                        <textarea id="small_description" class="form-control" rows="7" name="small_description"
                             placeholder="Short Description !" aria-label="Description !"
                             aria-describedby="basic-icon-default-message2"
                             required>@if(!empty($blog)) {{ $blog->small_description }} @endif</textarea>
@@ -95,7 +108,7 @@
                     <div class="input-group input-group-merge">
                         <span id="basic-icon-default-message2" class="input-group-text"><i
                                 class="bx bx-comment"></i></span>
-                        <textarea id="long_description" class="form-control" name="long_description"
+                        <textarea id="long_description" class="form-control" rows="7" name="long_description"
                             placeholder="Long Description !" aria-label="Long Description !"
                             aria-describedby="basic-icon-default-message2"
                             required>@if(!empty($blog)) {{ $blog->long_description }} @endif</textarea>

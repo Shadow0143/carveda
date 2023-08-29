@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
+            $table->integer('cat_id');
             $table->string('title');
             $table->string('icon');
+            $table->string('start_price');
+            $table->string('end_price');
             $table->longText('shortdescription');
-            $table->longText('longdescription');
             $table->enum('status',['1','0']);
             $table->timestamps();
         });

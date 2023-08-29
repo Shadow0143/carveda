@@ -38,7 +38,8 @@
             <div class="col-xl-8">
                 <div class="blog-single-area bg-white rounded">
                     <div class="bs-blog-meta d-flex align-items-center justify-content-between">
-                        <a href="blog-list.html" class="btn-meta fw-bold">{{ $blog->category }}</a>
+                        <a href="{{ route('blogwithCategory', ['slug' => $blog->category_name]) }}"
+                            class="btn-meta fw-bold">{{ $blog->category_name }}</a>
                         <span class="date">{{ date('M d, Y' , strtotime($blog->created_at)) }}</span>
                     </div>
                     <h3 class="blog-title mt-3">{{ $blog ->title }}</h3>
@@ -71,12 +72,10 @@
                             <span class="spacer align-self-end"></span>
                         </div>
                         <ul class="widget-nav mt-30">
-                            <li><a href="blog-grid.html">Auto Detailing <span class="float-end">(06)</span></a></li>
-                            <li><a href="blog-grid.html">Car News <span class="float-end">(14)</span></a></li>
-                            <li><a href="blog-grid.html">Engine Solution <span class="float-end">(09)</span></a></li>
-                            <li><a href="blog-grid.html">Transmission <span class="float-end">(10)</span></a></li>
-                            <li><a href="blog-grid.html">Steering <span class="float-end">(18)</span></a></li>
-                            <li><a href="blog-grid.html">Car Reviews <span class="float-end">(14)</span></a></li>
+                            @foreach ($blogCategory as $key=>$val)
+                            <li><a href="{{ route('blogwithCategory', ['slug' => $val->title]) }}">{{ $val->title
+                                    }}<span class="float-end">({{ $val->count }})</span></a></li>
+                            @endforeach
                         </ul>
                     </div>
                     <div class="sidebar-widget recent_post-widget bg-white widget-padding rounded mt-4">

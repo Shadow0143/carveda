@@ -17,6 +17,22 @@
                 <input type="hidden" name="id" id="id" value="{{ $services->id }}">
                 @endif
                 <div class="mb-3">
+                    <label class="form-label" for="basic-icon-default-fullname">Category <span
+                            class="text-danger">*</span></label>
+                    <div class="input-group input-group-merge">
+                        <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                class="bx bx-money"></i></span>
+                        <select name="category" id="category" class="form-control">
+                            <option value=""> --- Please Select Category --- </option>
+                            @foreach ($serviceCategory as $key=>$val)
+                            <option value="{{ $val->id }}" @if(!empty($services)) @if ($val->id === $services->cat_id)
+                                selected @endif @endif >{{ $val->title }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-3">
                     <label class="form-label" for="basic-icon-default-fullname">Title <span
                             class="text-danger">*</span></label>
                     <div class="input-group input-group-merge">
@@ -28,8 +44,9 @@
                     </div>
                 </div>
 
+
                 <div class="mb-3">
-                    <label class="form-label" for="basic-icon-default-email">Icon <span
+                    <label class="form-label" for="basic-icon-default-email">Image <span
                             class="text-danger">*</span></label>
                     <div class="input-group input-group-merge">
                         <span class="input-group-text"><i class="bx bx-image"></i></span>
@@ -40,28 +57,40 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label" for="basic-icon-default-message">Short Description <span
+                    <label class="form-label" for="basic-icon-default-email">Start Price <span
                             class="text-danger">*</span></label>
                     <div class="input-group input-group-merge">
-                        <span id="basic-icon-default-message2" class="input-group-text"><i
-                                class="bx bx-comment"></i></span>
-                        <textarea id="shortdescription" class="form-control editor" cols="12" rows="6"
-                            name="shortdescription" placeholder="Short Description !" aria-label="Description !"
-                            aria-describedby="basic-icon-default-message2"
-                            required>@if(!empty($services)) {{ $services->shortdescription }} @endif</textarea>
+                        <span class="input-group-text"><i class="bx bx-image"></i></span>
+                        <input type="text" id="start_price" name="start_price" class="form-control" required
+                            placeholder="Start Price" aria-label="" aria-describedby="basic-icon-default-email2"
+                            @if(!empty($services)) value="{{ $services->start_price }}" @endif />
                     </div>
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label" for="basic-icon-default-message">Long Description <span
+                    <label class="form-label" for="basic-icon-default-email">End Price <span
+                            class="text-danger">*</span></label>
+                    <div class="input-group input-group-merge">
+                        <span class="input-group-text"><i class="bx bx-image"></i></span>
+                        <input type="text" id="end_price" name="end_price" class="form-control" required
+                            placeholder="End Price" aria-label="" aria-describedby="basic-icon-default-email2"
+                            @if(!empty($services)) value="{{ $services->end_price }}" @endif />
+                    </div>
+                </div>
+
+
+
+
+                <div class="mb-3">
+                    <label class="form-label" for="basic-icon-default-message">Description <span
                             class="text-danger">*</span></label>
                     <div class="input-group input-group-merge">
                         <span id="basic-icon-default-message2" class="input-group-text"><i
                                 class="bx bx-comment"></i></span>
-                        <textarea id="longdescription" class="form-control editor " cols="12" rows="6"
-                            name="longdescription" placeholder="Long Description !" aria-label="Description !"
+                        <textarea id="description" class="form-control editor" cols="12" rows="6" name="description"
+                            placeholder="Description !" aria-label="Description !"
                             aria-describedby="basic-icon-default-message2"
-                            required>@if(!empty($services)) {{ $services->longdescription }} @endif</textarea>
+                            required>@if(!empty($services)) {{ $services->shortdescription }} @endif</textarea>
                     </div>
                 </div>
 

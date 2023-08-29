@@ -19,11 +19,13 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\welcomeController::class, 'welcome'])->name('welcome');
 Route::get('/contact', [App\Http\Controllers\welcomeController::class, 'contact'])->name('contact');
 Route::get('/services', [App\Http\Controllers\welcomeController::class, 'services'])->name('services');
+Route::get('/service-details/{slug}', [App\Http\Controllers\welcomeController::class, 'servicesDetails'])->name('servicesDetails');
 Route::get('/blogs', [App\Http\Controllers\welcomeController::class, 'blogs'])->name('blogs');
+Route::get('/blogs-details/{id}', [App\Http\Controllers\welcomeController::class, 'blogDetails'])->name('blogDetails');
+Route::get('/blogs/{slug}', [App\Http\Controllers\welcomeController::class, 'blogwithCategory'])->name('blogwithCategory');
 Route::get('/about-us', [App\Http\Controllers\welcomeController::class, 'aboutUs'])->name('aboutUs');
 Route::get('/work', [App\Http\Controllers\welcomeController::class, 'work'])->name('work');
 Route::get('/work-detail/{id}', [App\Http\Controllers\welcomeController::class, 'workDeails'])->name('workDeails');
-Route::get('/blogs-details/{id}', [App\Http\Controllers\welcomeController::class, 'blogDetails'])->name('blogDetails');
 Route::post('/submit-contact', [App\Http\Controllers\welcomeController::class, 'submitContact'])->name('submitContact');
 Route::post('/submit-subscribe', [App\Http\Controllers\welcomeController::class, 'subscribe'])->name('subscribe');
 

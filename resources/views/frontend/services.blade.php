@@ -49,12 +49,13 @@
                         @foreach ($services as $key=>$val)
                         <div class="ct-col">
                             <div class="brand-card text-center bg-white position-relative rounded">
-                                <img src="{{ asset('service') }}/{{ $val->icon }}" alt="{{ $val->title }}"
+                                <img src="{{ asset('category') }}/{{ $val->image }}" alt="{{ $val->title }}"
                                     class="img-fluid icon-black" />
-                                <img src="{{ asset('service') }}/{{ $val->icon }}" alt="{{ $val->title }}"
+                                <img src="{{ asset('category') }}/{{ $val->image }}" alt="{{ $val->title }}"
                                     class="img-fluid icon-red" />
                                 <h5 class="mt-3 mb-0">{{ $val->title }}</h5>
-                                <a href="#" class="explore-btn position-absolute text-white"><i
+                                <a href="{{ route('servicesDetails', ['slug' => $val->title]) }}"
+                                    class="explore-btn position-absolute text-white"><i
                                         class="fa-solid fa-arrow-right-long"></i></a>
                             </div>
                         </div>

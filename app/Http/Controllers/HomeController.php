@@ -169,25 +169,34 @@ class HomeController extends Controller
      //====================== Services ===================================
         public function servicesList(){
             $services = Service::orderBy('id', 'desc')->paginate(10);
+            foreach($services as $key=>$val){
+                $category = Category::select('title')->where('type','service')->where('id',$val->cat_id)->first();
+                $services[$key]->category_name = $category->title;
+            }
+
             return view('service/list',compact('services'));
         }
 
         public function servicesAdd(){
-            return view('service/addedit');
+            $serviceCategory = Category::orderBy('id','DESC')->where('type','service')->where('status',true)->take(10)->get();
+            return view('service/addedit',compact('serviceCategory'));
         }
 
         public function servicesEdit($id){
             $services = Service::find($id);
-            return view('service/addedit',compact('services'));
+            $serviceCategory = Category::orderBy('id','DESC')->where('type','service')->where('status',true)->take(10)->get();
+            return view('service/addedit',compact('services','serviceCategory'));
         }
 
         public function servicesSave(Request $request){
             // dd($request->all());
             if (!empty($request->id)) {
                 $service = Service::find($request->id);
+                $service->cat_id = $request->category;
                 $service->title = $request->title;
-                $service->shortdescription = $request->shortdescription;
-                $service->longdescription = $request->longdescription;
+                $service->shortdescription = $request->description;
+                $service->start_price = $request->start_price;
+                $service->end_price = $request->end_price;
                 $service->status = $request->status;
                 if ($request->hasfile('image')) {
                     $image = $request->file('image');
@@ -202,9 +211,11 @@ class HomeController extends Controller
             
             } else {    
                 $service = new Service();
+                $service->cat_id = $request->category;
                 $service->title = $request->title;
-                $service->shortdescription = $request->shortdescription;
-                $service->longdescription = $request->longdescription;
+                $service->shortdescription = $request->description;
+                $service->start_price = $request->start_price;
+                $service->end_price = $request->end_price;
                 $service->status = $request->status;
                 if ($request->hasfile('image')) {
                     $image = $request->file('image');
@@ -305,16 +316,22 @@ class HomeController extends Controller
     //====================== Blogs ===================================
         public function blogsList(){
             $allBlogs = Blog::orderBy('id', 'desc')->paginate(10);
+            foreach($allBlogs as $key=>$val){
+                $category = Category::select('title')->where('type','blog')->where('id',$val->category)->first();
+                $allBlogs[$key]->category_name = $category->title;
+            }
             return view('blogs/list',compact('allBlogs'));
         }
 
         public function blogsAdd(){
-            return view('blogs/addEdit');
+            $blogCategory = Category::orderBy('id','DESC')->where('type','blog')->where('status',true)->get();
+            return view('blogs/addEdit',compact('blogCategory'));
         }
 
         public function blogsEdit($id){
             $blog = Blog::find($id);
-            return view('blogs/addEdit',compact('blog'));
+            $blogCategory = Category::orderBy('id','DESC')->where('type','blog')->where('status',true)->get();
+            return view('blogs/addEdit',compact('blog','blogCategory'));
         }
 
         public function blogsSave(Request $request){
