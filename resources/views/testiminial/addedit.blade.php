@@ -39,6 +39,34 @@
                             value="{{ $testimonial->designation }}" @endif required />
                     </div>
                 </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="basic-icon-default-company">Title <span
+                            class="text-danger">*</span></label>
+                    <div class="input-group input-group-merge">
+                        <span id="basic-icon-default-company2" class="input-group-text"><i
+                                class="bx bx-money"></i></span>
+                        <input type="text" id="title" name="title" class="form-control" placeholder="Title"
+                            aria-label="Designation" aria-describedby="basic-icon-default-company2"
+                            @if(!empty($testimonial)) value="{{ $testimonial->title }}" @endif required />
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="basic-icon-default-company">Ratings <span
+                            class="text-danger">*</span></label>
+                    <div class="input-group input-group-merge">
+                        <span id="basic-icon-default-company2" class="input-group-text"><i
+                                class="bx bx-money"></i></span>
+                        <input type="text" id="rating" name="rating" class="form-control" placeholder="Rating"
+                            aria-label="rating" aria-describedby="basic-icon-default-company2" @if(!empty($testimonial))
+                            value="{{ $testimonial->rating }}" @endif required />
+                    </div>
+                </div>
+
+
+
+
                 <div class="mb-3">
                     <label class="form-label" for="basic-icon-default-email">Image <span
                             class="text-danger">*</span></label>
@@ -67,7 +95,7 @@
                         <span id="basic-icon-default-message2" class="input-group-text"><i
                                 class="bx bx-comment"></i></span>
                         <textarea id="description" class="form-control" name="description" placeholder="Description !"
-                            aria-label="Description !" aria-describedby="basic-icon-default-message2"
+                            aria-label="Description !" aria-describedby="basic-icon-default-message2" cols="12" rows="6"
                             required>@if(!empty($testimonial)) {{ $testimonial->text }} @endif</textarea>
                     </div>
                 </div>

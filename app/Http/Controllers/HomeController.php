@@ -10,6 +10,10 @@ use App\Models\Service;
 use App\Models\Contact;
 use App\Models\Works;
 use App\Models\Blog;
+use App\Models\Subscribe;
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\Car;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Storage;
 
@@ -59,6 +63,8 @@ class HomeController extends Controller
             if (!empty($request->id)) {
                 $testimonial = Testimonial::find($request->id);
                 $testimonial->name = $request->user_name;
+                $testimonial->title = $request->title;
+                $testimonial->rating = $request->rating;
                 $testimonial->designation = $request->designation;
                 $testimonial->text = $request->description;
                 $testimonial->status = $request->status;
@@ -76,6 +82,8 @@ class HomeController extends Controller
                 // dd($request->all());
                 $testimonial = new Testimonial();
                 $testimonial->name = $request->user_name;
+                $testimonial->title = $request->title;
+                $testimonial->rating = $request->rating;
                 $testimonial->designation = $request->designation;
                 $testimonial->text = $request->description;
                 $testimonial->status = $request->status;
@@ -129,13 +137,6 @@ class HomeController extends Controller
                     $image->move($result, $name);
                     $aboutme->image = $name;
                 }
-                if ($request->hasfile('resume')) {
-                    $image = $request->file('resume');
-                    $name = 'Resume' . time() . '.' . $image->getClientOriginalExtension();
-                    $result = public_path('aboutme');
-                    $image->move($result, $name);
-                    $aboutme->image = $name;
-                }
                 $aboutme->save();
                 toast('Record has been updated!', 'success');
             
@@ -152,14 +153,6 @@ class HomeController extends Controller
                     $image->move($result, $name);
                     $aboutme->image = $name;
                 }
-                if ($request->hasfile('resume')) {
-                    $image = $request->file('resume');
-                    $resume = 'Resume' . time() . '.' . $image->getClientOriginalExtension();
-                    $result = public_path('aboutme');
-                    $image->move($result, $resume);
-                    $aboutme->resume = $resume;
-                }
-
                 $aboutme->save();
                 toast('New About section is added!', 'success');
             }
@@ -234,13 +227,19 @@ class HomeController extends Controller
     //====================== / Services ===================================
 
 
-    //======================= Contact =============================================
+    //======================= Contact / subscriber=============================================
         public function contactList(){
             $contact = Contact::orderBy('id','desc')->paginate(10);
             return view('contact/list',compact('contact'));
 
         }
-    //======================= / Contact =============================================
+
+        public function subscriberList(){
+            $subscribe = Subscribe::orderBy('id','desc')->paginate(10);
+            return view('subscribe/list',compact('subscribe'));
+
+        }
+    //======================= / Contact / subscriber=============================================
 
 
     //====================== Works ===================================
@@ -323,6 +322,7 @@ class HomeController extends Controller
             if (!empty($request->id)) {
                 $blog = Blog::find($request->id);
                 $blog->title = $request->title;
+                $blog->category = $request->category;
                 $blog->post_by = $request->post_by;
                 $blog->small_description = $request->small_description;
                 $blog->long_description = $request->long_description;
@@ -334,6 +334,16 @@ class HomeController extends Controller
                     $image->move($result, $name);
                     $blog->image = $name;
                 }
+
+                if ($request->hasfile('user_image')) {
+                    $image = $request->file('user_image');
+                    $name = 'BlogsUser' . time() . '.' . $image->getClientOriginalExtension();
+                    $result = public_path('blogsUserImage');
+                    $image->move($result, $name);
+                    $blog->user_image = $name;
+                }
+
+
                 $blog->save();
                 toast('Record has been updated!', 'success');
             
@@ -341,6 +351,7 @@ class HomeController extends Controller
                 // dd($request->all());
                 $blog = new Blog();
                 $blog->title = $request->title;
+                $blog->category = $request->category;
                 $blog->post_by = $request->post_by;
                 $blog->small_description = $request->small_description;
                 $blog->long_description = $request->long_description;
@@ -352,6 +363,14 @@ class HomeController extends Controller
                     $image->move($result, $name);
                     $blog->image = $name;
                 }
+                if ($request->hasfile('user_image')) {
+                    $image = $request->file('user_image');
+                    $name = 'BlogsUser' . time() . '.' . $image->getClientOriginalExtension();
+                    $result = public_path('blogsUserImage');
+                    $image->move($result, $name);
+                    $blog->user_image = $name;
+                }
+
                 $blog->save();
                 toast('New blogs has been added!', 'success');
             }
@@ -363,5 +382,66 @@ class HomeController extends Controller
             $blogs->delete();
         }
     //====================== / Blogs ===================================
+
+
+
+    //====================== Caategories ===================================
+        public function categoryList(){
+            $category = Category::orderBy('id', 'desc')->paginate(10);
+            return view('category/list',compact('category'));
+        }
+
+        public function categoryAdd(){
+            return view('category/addEdit');
+        }
+
+        public function categoryEdit($id){
+            $category = Category::find($id);
+            return view('category/addEdit',compact('category'));
+        }
+
+        public function categorySave(Request $request){
+            // dd($request->all());
+            if (!empty($request->id)) {
+                $category = Category::find($request->id);
+                $category->type = $request->type;
+                $category->title = $request->title;
+                $category->status = $request->status;
+                if ($request->hasfile('image')) {
+                    $image = $request->file('image');
+                    $name = 'Category' . time() . '.' . $image->getClientOriginalExtension();
+                    $result = public_path('category');
+                    $image->move($result, $name);
+                    $category->image = $name;
+                }
+            
+                $category->save();
+                toast('Record has been updated!', 'success');
+            
+            } else {    
+                $category = new Category();
+                $category->type = $request->type;
+                $category->title = $request->title;
+                $category->status = $request->status;
+                if ($request->hasfile('image')) {
+                    $image = $request->file('image');
+                    $name = 'Category' . time() . '.' . $image->getClientOriginalExtension();
+                    $result = public_path('category');
+                    $image->move($result, $name);
+                    $category->image = $name;
+                }
+            
+                $category->save();
+                toast('New Category is added!', 'success');
+            }
+            return redirect()->route('categoryList');
+        }
+
+        public function categoryDelete(Request $request){
+            $package = Category::find($request->id);
+            $package->delete();
+        }
+    //====================== / Caategories ===================================
+
 
 }

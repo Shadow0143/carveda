@@ -19,8 +19,10 @@
             <table class="table">
                 <thead class="text-center">
                     <tr>
+                        <th>Title</th>
                         <th>User Name</th>
                         <th>Designation</th>
+                        <th>Rating</th>
                         <th>Image</th>
                         <th>Status</th>
                         <th>Actions</th>
@@ -30,10 +32,12 @@
                     @forelse($allTestimonial as $key => $value)
                     <tr class="@if($value->status ==1 )table-success @else table-danger @endif"
                         id="willremove{{ $value->id }}">
+                        <td>{{ $value->title }}</td>
                         <td>
                             <i class="fab fa-bootstrap fa-lg text-primary me-3"></i> <strong>{{ $value->name }}</strong>
                         </td>
                         <td>{{ $value->designation }} </td>
+                        <td>{{ $value->rating }}</td>
                         <td>
                             <ul class="list-unstyled">
                                 <a href="{{ asset('testimonialImage') }}/{{ $value->image }}" target="_blank">

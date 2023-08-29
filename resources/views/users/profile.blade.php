@@ -51,7 +51,7 @@
 
                             <div class="mb-3 col-md-6">
                                 <label for="email" class="form-label">E-mail</label>
-                                <input class="form-control" type="text" id="email" name="email"
+                                <input class="form-control" type="text" id="email" name="email" readonly
                                     value="{{ $detail->email }}" placeholder="john.doe@example.com" />
                             </div>
 

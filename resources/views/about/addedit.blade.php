@@ -29,23 +29,11 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label" for="basic-icon-default-email">Image <span
-                            class="text-danger">*</span></label>
+                    <label class="form-label" for="basic-icon-default-email">Image </label>
                     <div class="input-group input-group-merge">
                         <span class="input-group-text"><i class="bx bx-image"></i></span>
                         <input type="file" id="image" name="image" class="form-control" placeholder=""
-                            aria-label="john.doe" aria-describedby="basic-icon-default-email2" @if(empty($aboutme))
-                            required @endif />
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label" for="basic-icon-default-email">Resume <span
-                            class="text-danger">*</span></label>
-                    <div class="input-group input-group-merge">
-                        <span class="input-group-text"><i class="bx bx-image"></i></span>
-                        <input type="file" id="resume" name="resume" class="form-control" placeholder="" aria-label=""
-                            aria-describedby="basic-icon-default-email2" @if(empty($aboutme)) required @endif />
+                            aria-label="john.doe" aria-describedby="basic-icon-default-email2" />
                     </div>
                 </div>
 
@@ -64,8 +52,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label" for="basic-icon-default-message">Long Description <span
-                            class="text-danger">*</span></label>
+                    <label class="form-label" for="basic-icon-default-message">Long Description </label>
                     <div class="input-group input-group-merge">
                         <span id="basic-icon-default-message2" class="input-group-text"><i
                                 class="bx bx-comment"></i></span>

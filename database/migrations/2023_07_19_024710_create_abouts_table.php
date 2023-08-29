@@ -14,10 +14,9 @@ return new class extends Migration
         Schema::create('abouts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('image');
-            $table->string('resume');
-            $table->longText('shortdescription');
-            $table->longText('longdescription');
+            $table->string('image')->nullable();
+            $table->longText('shortdescription')->nullable();
+            $table->longText('longdescription')->nullable();
             $table->enum('status',['1','0']);
             $table->timestamps();
         });

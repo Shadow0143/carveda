@@ -64,13 +64,27 @@
                         <nav class="at_nav_menu d-none d-xl-block md_menu_list">
                             <ul>
                                 <li><a href="{{ route('welcome') }}" class="active">Home</a></li>
-                                <li><a href="services.html">Service</a></li>
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="portfolio.html">Portfolio</a></li>
-                                <li><a href="about.html">About Us</a></li>
+                                <li><a href="{{ route('services') }}">Service</a></li>
+                                <li><a href="{{ route('blogs') }}">Blog</a></li>
+                                <li><a href="{{ route('work') }}">Work</a></li>
+                                <li><a href="{{ route('aboutUs') }}">About Us</a></li>
                                 <li><a href="{{ route('contact') }}">Contact Us</a></li>
                             </ul>
                         </nav>
+
+                        @auth()
+                        <a class="-none d-md-inline-block" href="#"
+                            onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                            <i class="bx bx-power-off me-2"></i>
+                            <span class="align-middle">Log Out</span>
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+
+                        @endauth
+                        @guest()
                         <a href="{{ route('login') }}" class="d-none d-md-inline-block"><span class="me-2"><i
                                     class="fa-solid fa-sign-in fa-2x"></i></span></a>
                         <button class="mobile-menu-toggle header-toggle-btn d-xl-none">
@@ -78,6 +92,7 @@
                             <span></span>
                             <span></span>
                         </button>
+                        @endguest
                     </div>
                 </div>
             </div>
@@ -96,12 +111,11 @@
     <nav class="mobile-menu-wrapper mt-40">
         <ul>
             <li class="active"><a href="{{ route('welcome') }}">Home</a></li>
-            <li><a href="services.html">Service</a></li>
-            <li><a href="blog.html">Blog</a></li>
-            <li><a href="portfolio.html">Portfolio</a></li>
-            <li><a href="blog.html">About Us</a></li>
+            <li><a href="{{ route('services') }}">Service</a></li>
+            <li><a href="{{ route('blogs') }}">Blog</a></li>
+            <li><a href="{{ route('work') }}">Work</a></li>
+            <li><a href="{{ route('aboutUs') }}">About Us</a></li>
             <li><a href="{{ route('contact') }}">Contact Us</a></li>
-            <li><a href="{{ route('login') }}">Login</a></li>
         </ul>
     </nav>
 </div>

@@ -17,6 +17,7 @@
                     <tr class="text-center">
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Service</th>
                         <th>Message</th>
                         <th>Send Date</th>
                     </tr>
@@ -29,6 +30,7 @@
                             <strong>{{ $value->name }}</strong>
                         </td>
                         <td>{{$value->email}}</td>
+                        <td>{{ $value->services }}</td>
                         <td>{{ $value->message }}</td>
                         <td>
                             {{ date_format($value->created_at,'d M, Y') }}

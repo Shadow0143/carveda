@@ -1,7 +1,7 @@
 @extends('layouts.backend.app')
 
 @section('title')
-<title>About | Add & Edit</title>
+<title>Services | Add & Edit</title>
 @endsection
 
 @section('content')
@@ -45,8 +45,8 @@
                     <div class="input-group input-group-merge">
                         <span id="basic-icon-default-message2" class="input-group-text"><i
                                 class="bx bx-comment"></i></span>
-                        <textarea id="shortdescription" class="form-control" name="shortdescription"
-                            placeholder="Short Description !" aria-label="Description !"
+                        <textarea id="shortdescription" class="form-control editor" cols="12" rows="6"
+                            name="shortdescription" placeholder="Short Description !" aria-label="Description !"
                             aria-describedby="basic-icon-default-message2"
                             required>@if(!empty($services)) {{ $services->shortdescription }} @endif</textarea>
                     </div>
@@ -58,8 +58,8 @@
                     <div class="input-group input-group-merge">
                         <span id="basic-icon-default-message2" class="input-group-text"><i
                                 class="bx bx-comment"></i></span>
-                        <textarea id="longdescription" class="form-control" name="longdescription"
-                            placeholder="Long Description !" aria-label="Description !"
+                        <textarea id="longdescription" class="form-control editor " cols="12" rows="6"
+                            name="longdescription" placeholder="Long Description !" aria-label="Description !"
                             aria-describedby="basic-icon-default-message2"
                             required>@if(!empty($services)) {{ $services->longdescription }} @endif</textarea>
                     </div>
@@ -82,7 +82,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-outline-primary">Save</button>
+                <button type="submit" class="btn btn-outline-primary text-primary">Save</button>
                 <a href="javaScript:void(0);" onclick="window.history.back()" class="btn btn-outline-danger">Cancel</a>
             </form>
         </div>

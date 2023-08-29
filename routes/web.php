@@ -18,7 +18,14 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes();
 Route::get('/', [App\Http\Controllers\welcomeController::class, 'welcome'])->name('welcome');
 Route::get('/contact', [App\Http\Controllers\welcomeController::class, 'contact'])->name('contact');
+Route::get('/services', [App\Http\Controllers\welcomeController::class, 'services'])->name('services');
+Route::get('/blogs', [App\Http\Controllers\welcomeController::class, 'blogs'])->name('blogs');
+Route::get('/about-us', [App\Http\Controllers\welcomeController::class, 'aboutUs'])->name('aboutUs');
+Route::get('/work', [App\Http\Controllers\welcomeController::class, 'work'])->name('work');
+Route::get('/work-detail/{id}', [App\Http\Controllers\welcomeController::class, 'workDeails'])->name('workDeails');
+Route::get('/blogs-details/{id}', [App\Http\Controllers\welcomeController::class, 'blogDetails'])->name('blogDetails');
 Route::post('/submit-contact', [App\Http\Controllers\welcomeController::class, 'submitContact'])->name('submitContact');
+Route::post('/submit-subscribe', [App\Http\Controllers\welcomeController::class, 'subscribe'])->name('subscribe');
 
 
 
@@ -73,6 +80,7 @@ Route::prefix('admin')->group(function () {
     //========================= Contact ================================
 
         Route::get('/contact-list', [App\Http\Controllers\HomeController::class, 'contactList'])->name('contactList');
+        Route::get('/subscriber-list', [App\Http\Controllers\HomeController::class, 'subscriberList'])->name('subscriberList');
    
     //========================= / Contact ================================
 
@@ -88,7 +96,7 @@ Route::prefix('admin')->group(function () {
     //========================= / Works ================================
 
 
-     //========================= Blogs ================================
+    //========================= Blogs ================================
 
         Route::get('/blogs-list', [App\Http\Controllers\HomeController::class, 'blogsList'])->name('blogsList');
         Route::get('/blogs-add', [App\Http\Controllers\HomeController::class, 'blogsAdd'])->name('blogsAdd');
@@ -97,6 +105,18 @@ Route::prefix('admin')->group(function () {
         Route::get('/blogs-delete', [App\Http\Controllers\HomeController::class, 'blogsDelete'])->name('blogsDelete'); 
 
     //========================= / Blogs ================================
+
+
+
+    //========================= Category ================================
+
+        Route::get('/category-list', [App\Http\Controllers\HomeController::class, 'categoryList'])->name('categoryList');
+        Route::get('/category-add', [App\Http\Controllers\HomeController::class, 'categoryAdd'])->name('categoryAdd');
+        Route::get('/category-edit/{id}', [App\Http\Controllers\HomeController::class, 'categoryEdit'])->name('categoryEdit');
+        Route::post('/category-save', [App\Http\Controllers\HomeController::class, 'categorySave'])->name('categorySave');
+        Route::get('/category-delete', [App\Http\Controllers\HomeController::class, 'categoryDelete'])->name('categoryDelete'); 
+
+    //========================= / Category ================================
 
 
 

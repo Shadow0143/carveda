@@ -27,19 +27,46 @@
                             value="{{ $blog->title }}" @endif required />
                     </div>
                 </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="basic-icon-default-fullname">Category <span
+                            class="text-danger">*</span></label>
+                    <div class="input-group input-group-merge">
+                        <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                class="bx bx-money"></i></span>
+                        <input type="text" class="form-control" name="category" id="category" placeholder="Category"
+                            aria-label="John Doe" aria-describedby="basic-icon-default-fullname2" @if(!empty($blog))
+                            value="{{ $blog->category }}" @endif required />
+                    </div>
+                </div>
+
+
                 <div class="mb-3">
                     <label class="form-label" for="basic-icon-default-company">Posted By <span
                             class="text-danger">*</span></label>
                     <div class="input-group input-group-merge">
                         <span id="basic-icon-default-company2" class="input-group-text"><i
-                                class="bx bx-money"></i></span>
+                                class="bx bx-user"></i></span>
                         <input type="text" id="post_by" name="post_by" class="form-control" placeholder="posted By"
                             aria-label="Designation" aria-describedby="basic-icon-default-company2" @if(!empty($blog))
                             value="{{ $blog->post_by }}" @endif required />
                     </div>
                 </div>
+
                 <div class="mb-3">
-                    <label class="form-label" for="basic-icon-default-email">Image <span
+                    <label class="form-label" for="basic-icon-default-email">Posted By User Image <span
+                            class="text-danger">*</span></label>
+                    <div class="input-group input-group-merge">
+                        <span class="input-group-text"><i class="bx bx-image"></i></span>
+                        <input type="file" id="user_image" name="user_image" class="form-control" placeholder=""
+                            aria-label="john.doe" aria-describedby="basic-icon-default-email2" @if(empty($blog))
+                            required @endif />
+                    </div>
+                </div>
+
+
+                <div class="mb-3">
+                    <label class="form-label" for="basic-icon-default-email">Blog Image <span
                             class="text-danger">*</span></label>
                     <div class="input-group input-group-merge">
                         <span class="input-group-text"><i class="bx bx-image"></i></span>

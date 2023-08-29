@@ -19,8 +19,6 @@
                     <tr class="text-center">
                         <th class="text-center">Title</th>
                         <th>Image</th>
-                        <th>Resume</th>
-                        {{-- <th>Short Description</th> --}}
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
@@ -41,12 +39,7 @@
                                 </a>
                             </ul>
                         </td>
-                        <td>
-                            <a href="{{ asset('aboutme') }}/{{ $value->resume }}" target="_blank">
-                                View
-                            </a>
-                        </td>
-                        {{-- <td></td> --}}
+
                         <td>
                             @if($value->status == 1)
                             <span class="badge bg-label-success me-1">Active</span>

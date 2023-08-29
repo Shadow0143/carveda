@@ -20,6 +20,7 @@
                 <thead class="text-center">
                     <tr>
                         <th>Title</th>
+                        <th>Category</th>
                         <th>Posted By</th>
                         <th>Image</th>
                         <th>Status</th>
@@ -34,7 +35,20 @@
                             <i class="fab fa-bootstrap fa-lg text-primary me-3"></i> <strong>{{ $value->title
                                 }}</strong>
                         </td>
-                        <td>{{ $value->post_by }} </td>
+                        <td>{{ $value->category }} </td>
+                        <td>
+                            <ul class="list-unstyled">
+
+                                <a href="{{ asset('blogsUserImage') }}/{{ $value->user_image }}" target="_blank">
+                                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
+                                        class="avatar avatar-xs pull-up" title="{{ $value->post_by }}">
+                                        <img src="{{ asset('blogsUserImage') }}/{{ $value->user_image }}" alt="Avatar"
+                                            class="rounded-circle" />
+                                    </li>
+                                </a>
+                            </ul>
+
+                        </td>
                         <td>
                             <ul class="list-unstyled">
                                 <a href="{{ asset('blogsImage') }}/{{ $value->image }}" target="_blank">

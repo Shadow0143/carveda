@@ -19,7 +19,7 @@
                     <tr class="text-center">
                         <th>Title</th>
                         <th>Icon</th>
-                        <th>Short Description</th>
+                        {{-- <th>Short Description</th> --}}
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
@@ -41,7 +41,7 @@
                             </ul>
                         </td>
 
-                        <td>{{ $value->shortdescription }}</td>
+                        {{-- <td>{{ $value->shortdescription }}</td> --}}
                         <td>
                             @if($value->status == 1)
                             <span class="badge bg-label-success me-1">Active</span>
