@@ -217,7 +217,8 @@
                                 <img src="{{ asset('category') }}/{{ $val->image }}" alt="{{ $val->title }}"
                                     class="img-fluid icon-red" />
                                 <h5 class="mt-3 mb-0">{{ $val->title }}</h5>
-                                <a href="#" class="explore-btn position-absolute text-white"><i
+                                <a href="{{ route('servicesDetails', ['slug' => $val->title]) }}"
+                                    class="explore-btn position-absolute text-white"><i
                                         class="fa-solid fa-arrow-right-long"></i></a>
                             </div>
                         </div>
