@@ -29,7 +29,7 @@ class welcomeController extends Controller
             }
 
 
-            $about = About::first();
+            $about = About::orderBy('id','DESC')->where('status',true)->take(3)->get();
             return view('welcome',compact('testimonials','about','works','blogs','serviceCategory'));
         }
 
@@ -38,8 +38,9 @@ class welcomeController extends Controller
         }
 
         public function services(){
+            $about = About::orderBy('id','DESC')->where('status',true)->take(3)->get();
             $services = Category::orderBy('id','DESC')->where('type','service')->where('status',true)->get();
-            return view('frontend/services',compact('services'));
+            return view('frontend/services',compact('services','about'));
         }
 
         public function servicesDetails($slug){
@@ -106,7 +107,7 @@ class welcomeController extends Controller
         public function aboutUs(){
             return view('frontend/about');
         }
-        
+
         public function work(){
             $works = Works::orderBy('id','DESC')->where('status',true)->paginate(20);
             return view('frontend/work',compact('works'));
@@ -128,7 +129,7 @@ class welcomeController extends Controller
             $contact->services = $request->services;
             $contact->message = $request->message;
             $contact->save();
-            toast('Thanks','We will contact you soon, stay with me.');
+            toast('Thanks ,We will contact you soon, stay with us.', 'success');
             return back();
             
         }
@@ -137,7 +138,7 @@ class welcomeController extends Controller
             $subscibe = new Subscribe();
             $subscibe->email = $request->email;
             $subscibe->save();
-            toast('Thanks','We will contact you soon, stay with me.');
+            toast('Thank you for subscribing us.' ,'success');
             return back();
         }
 }

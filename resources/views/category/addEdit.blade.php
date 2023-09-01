@@ -24,8 +24,8 @@
                             <option value=""> --- Select Please --- </option>
                             <option value="brand" @if(!empty($category) && $category->type == 'brand') selected
                                 @endif >Brands</option>
-                            <option value="cars" @if(!empty($category) && $category->type == 'cars') selected
-                                @endif >Cars</option>
+                            {{-- <option value="cars" @if(!empty($category) && $category->type == 'cars') selected
+                                @endif >Cars</option> --}}
                             <option value="service" @if(!empty($category) && $category->type == 'service') selected
                                 @endif >Services</option>
                             <option value="blog" @if(!empty($category) && $category->type == 'blog') selected

@@ -16,13 +16,53 @@
                 @if(!empty($services))
                 <input type="hidden" name="id" id="id" value="{{ $services->id }}">
                 @endif
+
+                <div class="mb-3">
+                    <label class="form-label" for="basic-icon-default-fullname">Type <span
+                            class="text-danger">*</span></label>
+                    <div class="input-group input-group-merge">
+                        <input type="radio" name="type" id="type" value="premium" required>&nbsp; Premium &nbsp; &nbsp;
+                        &nbsp;
+                        <input type="radio" name="type" id="type" value="normal" required>&nbsp; Normal
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="basic-icon-default-fullname">Brand <span
+                            class="text-danger">*</span></label>
+                    <div class="input-group input-group-merge">
+                        <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                class="bx bx-money"></i></span>
+                        <select name="brand" id="brand" class="form-control" required>
+                            <option value=""> --- Please Select Brand --- </option>
+                            @foreach ($brandCategory as $key=>$val)
+                            <option value="{{ $val->id }}" @if(!empty($services)) @if ($val->id === $services->cat_id)
+                                selected @endif @endif >{{ $val->title }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="basic-icon-default-fullname">Cars <span
+                            class="text-danger">*</span></label>
+                    <div class="input-group input-group-merge">
+                        <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                class="bx bx-money"></i></span>
+                        <select name="car" id="car" class="form-control" required>
+                            <option value=""> --- Please Select Car --- </option>
+
+                        </select>
+                    </div>
+                </div>
+
                 <div class="mb-3">
                     <label class="form-label" for="basic-icon-default-fullname">Category <span
                             class="text-danger">*</span></label>
                     <div class="input-group input-group-merge">
                         <span id="basic-icon-default-fullname2" class="input-group-text"><i
                                 class="bx bx-money"></i></span>
-                        <select name="category" id="category" class="form-control">
+                        <select name="category" id="category" class="form-control" required>
                             <option value=""> --- Please Select Category --- </option>
                             @foreach ($serviceCategory as $key=>$val)
                             <option value="{{ $val->id }}" @if(!empty($services)) @if ($val->id === $services->cat_id)
@@ -31,6 +71,8 @@
                         </select>
                     </div>
                 </div>
+
+
 
                 <div class="mb-3">
                     <label class="form-label" for="basic-icon-default-fullname">Title <span

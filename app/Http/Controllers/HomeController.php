@@ -166,7 +166,7 @@ class HomeController extends Controller
     //====================== / About Me ===================================
 
 
-     //====================== Services ===================================
+    //====================== Services ===================================
         public function servicesList(){
             $services = Service::orderBy('id', 'desc')->paginate(10);
             foreach($services as $key=>$val){
@@ -178,14 +178,17 @@ class HomeController extends Controller
         }
 
         public function servicesAdd(){
-            $serviceCategory = Category::orderBy('id','DESC')->where('type','service')->where('status',true)->take(10)->get();
-            return view('service/addedit',compact('serviceCategory'));
+            $serviceCategory = Category::orderBy('id','DESC')->where('type','service')->where('status',true)->get();
+            $brandCategory = Category::orderBy('id','DESC')->where('type','brand')->where('status',true)->get();
+            return view('service/addedit',compact('serviceCategory','brandCategory'));
         }
 
         public function servicesEdit($id){
             $services = Service::find($id);
-            $serviceCategory = Category::orderBy('id','DESC')->where('type','service')->where('status',true)->take(10)->get();
-            return view('service/addedit',compact('services','serviceCategory'));
+            $serviceCategory = Category::orderBy('id','DESC')->where('type','service')->where('status',true)->get();
+            $brandCategory = Category::orderBy('id','DESC')->where('type','brand')->where('status',true)->get();
+
+            return view('service/addedit',compact('services','serviceCategory','brandCategory'));
         }
 
         public function servicesSave(Request $request){
@@ -193,6 +196,9 @@ class HomeController extends Controller
             if (!empty($request->id)) {
                 $service = Service::find($request->id);
                 $service->cat_id = $request->category;
+                $service->type = $request->type;
+                $service->brand = $request->brand;
+                $service->car = $request->car;
                 $service->title = $request->title;
                 $service->shortdescription = $request->description;
                 $service->start_price = $request->start_price;
@@ -212,6 +218,9 @@ class HomeController extends Controller
             } else {    
                 $service = new Service();
                 $service->cat_id = $request->category;
+                $service->type = $request->type;
+                $service->brand = $request->brand;
+                $service->car = $request->car;
                 $service->title = $request->title;
                 $service->shortdescription = $request->description;
                 $service->start_price = $request->start_price;
@@ -459,6 +468,58 @@ class HomeController extends Controller
             $package->delete();
         }
     //====================== / Caategories ===================================
+
+
+
+    //====================== Services ===================================
+        public function carList(){
+            $cars = Car::orderBy('id', 'desc')->paginate(10);
+            foreach($cars as $key=>$val){
+                $category = Category::select('title')->where('type','brand')->where('id',$val->brand_id)->first();
+                $cars[$key]->category_name = $category->title;
+            }
+            return view('car/list',compact('cars'));
+        }
+
+        public function carAdd(){
+            $brandCategory = Category::orderBy('id','DESC')->where('type','brand')->where('status',true)->get();
+            return view('car/addEdit',compact('brandCategory'));
+        }
+
+        public function carEdit($id){
+            $car = Car::find($id);
+            $brandCategory = Category::orderBy('id','DESC')->where('type','brand')->where('status',true)->get();
+
+            return view('car/addEdit',compact('car','brandCategory'));
+        }
+
+        public function carSave(Request $request){
+            // dd($request->all());
+            if (!empty($request->id)) {
+                $car = Car::find($request->id);
+                $car->brand_id = $request->brand;
+                $car->car_name = $request->car_name;
+                $car->status = $request->status;
+                
+                $car->save();
+                toast('Record has been updated!', 'success');
+            
+            } else {    
+                $car = new Car();
+                $car->brand_id = $request->brand;
+                $car->car_name = $request->car_name;
+                $car->status = $request->status;
+                $car->save();
+                toast('New car is added!', 'success');
+            }
+            return redirect()->route('carList');
+        }
+
+        public function carDelete(Request $request){
+            $package = Car::find($request->id);
+            $package->delete();
+        }
+    //====================== / Services ===================================
 
 
 }

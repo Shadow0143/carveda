@@ -324,39 +324,20 @@
             </div>
             <div class="col-xl-6 col-lg-6">
                 <div class="about-right mt-5 mt-lg-0">
-                    <div class="about-icon-box bg-white shadow rounded">
+                    @foreach ($about as $key=>$val)
+                    <div class="about-icon-box bg-white shadow rounded  mt-20 @if ($key==1)
+                     ms-md-5 @endif">
                         <div class="ab-icon-box-top d-flex align-items-center mb-3">
                             <span class="icon-wrapper d-flex align-items-center justify-content-center rounded"><i
                                     class="flaticon-shield"></i></span>
-                            <h5 class="mb-0 ms-3">Expert Certified Mechanics</h5>
+                            <h5 class="mb-0 ms-3">{{ $val->title }}</h5>
                         </div>
                         <p class="mb-0">
-                            Credibly maximize resource maximizing channels after
-                            interoperable frictionless. Rather than synergistic models.
+                            {{$val->shortdescription}}
                         </p>
                     </div>
-                    <div class="about-icon-box bg-white shadow rounded mt-20 ms-md-5">
-                        <div class="ab-icon-box-top d-flex align-items-center mb-3">
-                            <span class="icon-wrapper d-flex align-items-center justify-content-center rounded"><i
-                                    class="flaticon-shield"></i></span>
-                            <h5 class="mb-0 ms-3">Genuine Spares Parts</h5>
-                        </div>
-                        <p class="mb-0">
-                            Credibly maximize resource maximizing channels after
-                            interoperable frictionless. Rather than synergistic models.
-                        </p>
-                    </div>
-                    <div class="about-icon-box bg-white shadow rounded mt-20">
-                        <div class="ab-icon-box-top d-flex align-items-center mb-3">
-                            <span class="icon-wrapper d-flex align-items-center justify-content-center rounded"><i
-                                    class="flaticon-price-tag"></i></span>
-                            <h5 class="mb-0 ms-3">Get Reasonable Price</h5>
-                        </div>
-                        <p class="mb-0">
-                            Credibly maximize resource maximizing channels after
-                            interoperable frictionless. Rather than synergistic models.
-                        </p>
-                    </div>
+                    @endforeach
+
                 </div>
             </div>
         </div>

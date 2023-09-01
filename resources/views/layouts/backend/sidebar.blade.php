@@ -28,8 +28,43 @@
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Works</span></li>
         <!-- Cards -->
 
+
         <li
-            class="menu-item @if( Route::currentRouteName() == 'aboutMeList' || Route::currentRouteName() == 'aboutMeAdd' ||Route::currentRouteName() == 'aboutMeEdit' || Route::currentRouteName() == 'servicesList' || Route::currentRouteName() == 'servicesAdd'  || Route::currentRouteName() == 'servicesEdit' || Route::currentRouteName() == 'worksList' || Route::currentRouteName() == 'worksAdd'  || Route::currentRouteName() == 'worksEdit' ||  Route::currentRouteName() == 'blogsList' || Route::currentRouteName() == 'blogsAdd'  || Route::currentRouteName() == 'blogsEdit' ||   Route::currentRouteName() == 'categoryList' || Route::currentRouteName() == 'categoryAdd'  || Route::currentRouteName() == 'categoryEdit' )  open active @endif">
+            class="menu-item @if( Route::currentRouteName() == 'permissionList' || Route::currentRouteName() == 'permissionAdd' || Route::currentRouteName() == 'permissionEdit' || Route::currentRouteName() == 'roleList' || Route::currentRouteName() == 'roleAdd' || Route::currentRouteName() == 'roleEdit' ||  Route::currentRouteName() == 'rolePermissionList' || Route::currentRouteName() == 'rolePermissionAdd' || Route::currentRouteName() == 'rolePermissionEdit' )  open active @endif">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-lock"></i>
+                <div data-i18n="CMS">Role & Permissions</div>
+            </a>
+
+            <ul class="menu-sub">
+                <li
+                    class="menu-item @if( Route::currentRouteName() == 'permissionList' || Route::currentRouteName() == 'permissionAdd' || Route::currentRouteName() == 'permissionEdit') active @endif">
+                    <a href="{{ route('permissionList') }}" class="menu-link">
+                        <div data-i18n="Basic">All Permissions</div>
+                    </a>
+                </li>
+
+                <li
+                    class="menu-item @if( Route::currentRouteName() == 'roleList' || Route::currentRouteName() == 'roleAdd' || Route::currentRouteName() == 'roleEdit') active @endif">
+                    <a href="{{ route('roleList') }}" class="menu-link">
+                        <div data-i18n="Basic">All Roles</div>
+                    </a>
+                </li>
+
+                <li
+                    class="menu-item @if( Route::currentRouteName() == 'rolePermissionList' || Route::currentRouteName() == 'rolePermissionAdd' || Route::currentRouteName() == 'rolePermissionEdit') active @endif">
+                    <a href="{{ route('rolePermissionList') }}" class="menu-link">
+                        <div data-i18n="Basic">Roles in Permission</div>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+
+
+
+        <li
+            class="menu-item @if( Route::currentRouteName() == 'aboutMeList' || Route::currentRouteName() == 'aboutMeAdd' ||Route::currentRouteName() == 'aboutMeEdit' || Route::currentRouteName() == 'servicesList' || Route::currentRouteName() == 'servicesAdd'  || Route::currentRouteName() == 'servicesEdit' || Route::currentRouteName() == 'worksList' || Route::currentRouteName() == 'worksAdd'  || Route::currentRouteName() == 'worksEdit' ||  Route::currentRouteName() == 'blogsList' || Route::currentRouteName() == 'blogsAdd'  || Route::currentRouteName() == 'blogsEdit' ||   Route::currentRouteName() == 'categoryList' || Route::currentRouteName() == 'categoryAdd'  || Route::currentRouteName() == 'categoryEdit' || Route::currentRouteName() == 'carList' || Route::currentRouteName() == 'carAdd'  || Route::currentRouteName() == 'carEdit' )  open active @endif">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-cog"></i>
                 <div data-i18n="CMS">CMS</div>
@@ -42,6 +77,14 @@
                         <div data-i18n="hange site logo">Master Category</div>
                     </a>
                 </li>
+
+                <li
+                    class="menu-item   @if( Route::currentRouteName() == 'carList' || Route::currentRouteName() == 'carAdd'  || Route::currentRouteName() == 'carEdit') active @endif">
+                    <a href="{{ route('carList') }}" class="menu-link">
+                        <div data-i18n="hange site logo">Cars</div>
+                    </a>
+                </li>
+
 
                 <li
                     class="menu-item  @if( Route::currentRouteName() == 'aboutMeList' || Route::currentRouteName() == 'aboutMeAdd'  ||Route::currentRouteName() == 'aboutMeEdit' ) active @endif ">

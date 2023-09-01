@@ -121,5 +121,51 @@ Route::prefix('admin')->group(function () {
     //========================= / Category ================================
 
 
+    //========================= Category ================================
+
+        Route::get('/car-list', [App\Http\Controllers\HomeController::class, 'carList'])->name('carList');
+        Route::get('/car-add', [App\Http\Controllers\HomeController::class, 'carAdd'])->name('carAdd');
+        Route::get('/car-edit/{id}', [App\Http\Controllers\HomeController::class, 'carEdit'])->name('carEdit');
+        Route::post('/car-save', [App\Http\Controllers\HomeController::class, 'carSave'])->name('carSave');
+        Route::get('/car-delete', [App\Http\Controllers\HomeController::class, 'carDelete'])->name('carDelete'); 
+
+    //========================= / Category ================================
+
+
+    //========================= Permissions ================================
+
+        Route::get('/permission-list', [App\Http\Controllers\RoleController::class, 'permissionList'])->name('permissionList');
+        Route::get('/permission-add', [App\Http\Controllers\RoleController::class, 'permissionAdd'])->name('permissionAdd');
+        Route::get('/permission-edit/{id}', [App\Http\Controllers\RoleController::class, 'permissionEdit'])->name('permissionEdit');
+        Route::post('/permission-save', [App\Http\Controllers\RoleController::class, 'permissionSave'])->name('permissionSave');
+        Route::get('/permission-delete', [App\Http\Controllers\RoleController::class, 'permissionDelete'])->name('permissionDelete'); 
+
+    //========================= / Permissions ================================
+
+
+    //========================= Permissions ================================
+
+        Route::get('/role-list', [App\Http\Controllers\RoleController::class, 'roleList'])->name('roleList');
+        Route::get('/role-add', [App\Http\Controllers\RoleController::class, 'roleAdd'])->name('roleAdd');
+        Route::get('/role-edit/{id}', [App\Http\Controllers\RoleController::class, 'roleEdit'])->name('roleEdit');
+        Route::post('/role-save', [App\Http\Controllers\RoleController::class, 'roleSave'])->name('roleSave');
+        Route::get('/role-delete', [App\Http\Controllers\RoleController::class, 'roleDelete'])->name('roleDelete'); 
+
+    //========================= / Permissions ================================
+
+
+    //========================= Permissions ================================
+
+        Route::get('/role-permission-list', [App\Http\Controllers\RoleController::class, 'rolePermissionList'])->name('rolePermissionList');
+        Route::get('/role-permission-add', [App\Http\Controllers\RoleController::class, 'rolePermissionAdd'])->name('rolePermissionAdd');
+        Route::get('/role-permission-edit/{id}', [App\Http\Controllers\RoleController::class, 'rolePermissionEdit'])->name('rolePermissionEdit');
+        Route::post('/role-permission-save', [App\Http\Controllers\RoleController::class, 'rolePermissionSave'])->name('rolePermissionSave');
+        Route::get('/role-permission-delete', [App\Http\Controllers\RoleController::class, 'rolePermissionDelete'])->name('rolePermissionDelete'); 
+
+    //========================= / Permissions ================================
+
+
+
+
 
 });

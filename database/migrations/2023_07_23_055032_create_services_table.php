@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->id();
             $table->integer('cat_id');
+            $table->integer('type');
+            $table->integer('brand');
+            $table->integer('car');
             $table->string('title');
             $table->string('icon');
             $table->string('start_price');

@@ -18,6 +18,9 @@
                 <thead>
                     <tr class="text-center">
                         <th>Category</th>
+                        <th>Type</th>
+                        <th>Brand</th>
+                        <th>car</th>
                         <th>Title</th>
                         <th>Icon</th>
                         <th>Start price - End Price</th>
@@ -29,6 +32,11 @@
                     @forelse($services as $key => $value)
                     <tr id="willremove{{ $value->id }}" class="table-primary text-center">
                         <td>{{ ucfirst($value->category_name) }}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+
                         <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{ $value->title }}</strong>
                         </td>
                         <td>
@@ -74,7 +82,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="5" class="text-center">No data found.</td>
+                        <td colspan="9" class="text-center">No data found.</td>
                     </tr>
                     @endforelse()
 

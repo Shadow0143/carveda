@@ -1,45 +1,34 @@
 @extends('layouts.backend.app')
 
 @section('title')
-<title>About Me | List</title>
+<title>Cars | List</title>
 @endsection
 
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y container-fluid">
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">About Me /</span> List</h4>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Cars /</span> List</h4>
     <!-- Basic Bootstrap Table -->
 
     <div class="card">
         <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column mt-5">
-            <a href="{{ route('aboutMeAdd') }}" class="btn btn-outline-primary btn-sm"> + ADD</a>
+            <a href="{{ route('carAdd') }}" class="btn btn-outline-primary btn-sm"> + ADD</a>
         </div>
         <div class="table-responsive text-nowrap">
             <table class="table">
                 <thead>
                     <tr class="text-center">
-                        <th class="text-center">Title</th>
-                        {{-- <th>Image</th> --}}
+                        <th>Brand Name</th>
+                        <th>Car Name</th>
                         <th>Status</th>
+                        <th>Created At</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
-                    @forelse($allAbout as $key => $value)
+                    @forelse($cars as $key => $value)
                     <tr id="willremove{{ $value->id }}" class="table-primary text-center">
-                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{ $value->title }}</strong>
-                        </td>
-                        {{-- <td>
-                            <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                                <a href="{{ asset('aboutme') }}/{{ $value->image }}" target="_blank">
-                                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                        class="avatar avatar-xs pull-up" title="{{ $value->title }}">
-                                        <img src="{{ asset('aboutme') }}/{{ $value->image }}" alt="Avatar"
-                                            class="rounded-circle" />
-                                    </li>
-                                </a>
-                            </ul>
-                        </td> --}}
-
+                        <td>{{ ucfirst($value->category_name) }}</td>
+                        <td>{{ $value->car_name }}</td>
                         <td>
                             @if($value->status == 1)
                             <span class="badge bg-label-success me-1">Active</span>
@@ -47,6 +36,7 @@
                             <span class="badge bg-label-danger me-1">Inactive</span>
                             @endif
                         </td>
+                        <td>{{ date('d M, Y',strtotime($value->created_at)) }}</td>
                         <td>
                             <div class="dropdown">
                                 <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
@@ -55,7 +45,7 @@
                                 </button>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item text-warning"
-                                        href="{{ route('aboutMeEdit', ['id' => $value->id]) }}"><i
+                                        href="{{ route('carEdit', ['id' => $value->id]) }}"><i
                                             class="bx bx-edit-alt me-1"></i>
                                         Edit</a>
 
@@ -68,7 +58,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="4" class="text-center">No data found.</td>
+                        <td colspan="5" class="text-center">No data found.</td>
                     </tr>
                     @endforelse()
 
@@ -90,7 +80,7 @@
             const id = $(this).data('id');
             swal({
                 title: "Are you sure?",
-                text: "want to remove this about section.",
+                text: "want to remove this service.",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
@@ -102,7 +92,7 @@
                 function(isConfirm){
                 if (isConfirm) {
                     $.ajax({
-                        url:'{{ route('aboutMeDelete') }}',
+                        url:'{{ route('carDelete') }}',
                         type:'GET',
                         data:{id:id},
                         success:function(res){

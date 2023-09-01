@@ -28,14 +28,14 @@
                     </div>
                 </div>
 
-                <div class="mb-3">
+                {{-- <div class="mb-3">
                     <label class="form-label" for="basic-icon-default-email">Image </label>
                     <div class="input-group input-group-merge">
                         <span class="input-group-text"><i class="bx bx-image"></i></span>
                         <input type="file" id="image" name="image" class="form-control" placeholder=""
                             aria-label="john.doe" aria-describedby="basic-icon-default-email2" />
                     </div>
-                </div>
+                </div> --}}
 
 
                 <div class="mb-3">
@@ -51,17 +51,16 @@
                     </div>
                 </div>
 
-                <div class="mb-3">
+                {{-- <div class="mb-3">
                     <label class="form-label" for="basic-icon-default-message">Long Description </label>
                     <div class="input-group input-group-merge">
                         <span id="basic-icon-default-message2" class="input-group-text"><i
                                 class="bx bx-comment"></i></span>
                         <textarea id="longdescription" class="form-control" name="longdescription"
                             placeholder="Long Description !" aria-label="Description !"
-                            aria-describedby="basic-icon-default-message2"
-                            required>@if(!empty($aboutme)) {{ $aboutme->longdescription }} @endif</textarea>
+                            aria-describedby="basic-icon-default-message2">@if(!empty($aboutme)) {{ $aboutme->longdescription }} @endif</textarea>
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="mb-3">
                     <label class="form-label" for="basic-icon-default-phone">Status</label>
