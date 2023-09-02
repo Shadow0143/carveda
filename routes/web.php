@@ -33,7 +33,7 @@ Route::post('/submit-subscribe', [App\Http\Controllers\welcomeController::class,
 
 
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware('adminCheck')->group(function () {
 
     // ======================== Admin =======================================
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -175,9 +175,9 @@ Route::prefix('admin')->group(function () {
 
     //========================= / Admin ================================
 
+    Route::get('/s/{token}', [HomeController::class, 'redirect'])->where('name', '[A-Za-z0-9]+');
 
 });
 
 
 Route::get('/{slug}', [App\Http\Controllers\welcomeController::class, 'notFound'])->name('notFound');
-

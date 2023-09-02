@@ -27,16 +27,17 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected function authenticated(Request $request, $user)
-    {
-        // dd($user);
-    if ( $user->role==0 && $user->role==1  ) {// do your magic here
-        return redirect()->route('home');
-    }
+    // protected function authenticated(Request $request, $user)
+    // {
+    //     // dd($user);
+    // if ( $user->role==0 && $user->role==1  ) {// do your magic here
+    //     return redirect()->route('home');
+    // }
 
-    return redirect()->route('welcome');
-    }
-    // protected $redirectTo = RouteServiceProvider::HOME;
+    // return redirect()->route('welcome');
+    // }
+    
+    protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.

@@ -18,7 +18,7 @@ class welcomeController extends Controller
 {
 
         public function notFound(){
-            return view('notFound');
+            return view('error/404');
         }
 
         public function welcome(){
