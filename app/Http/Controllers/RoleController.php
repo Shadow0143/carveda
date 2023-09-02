@@ -11,9 +11,15 @@ use Exception;
 
 class RoleController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     //====================== Permission ===================================
         public function permissionList(){
-            $permission = Permission::all();
+            $permission = Permission::paginate(20);
             return view('permission/list',compact('permission'));
         }
 
@@ -87,130 +93,130 @@ class RoleController extends Controller
 
 
     //====================== Role ===================================
-    public function rolePermissionList(){
-        $dataArray = array();
-        $roleHasPermission = RoleHasPermission::get();
+        public function rolePermissionList(){
+            $dataArray = array();
+            $roleHasPermission = RoleHasPermission::get();
 
-        foreach ($roleHasPermission as $key => $val) {
-            $role = Role::where('id', $val->role_id)->first();
-            $permission = Permission::where('id', $val->permission_id)->first();
+            foreach ($roleHasPermission as $key => $val) {
+                $role = Role::where('id', $val->role_id)->first();
+                $permission = Permission::where('id', $val->permission_id)->first();
 
-            if ($role && $permission) {
-                $roleId = $role->id;
-                $roleName = $role->name;
-                $permissionName = $permission->name;
-                $permissionId = $permission->id;
+                if ($role && $permission) {
+                    $roleId = $role->id;
+                    $roleName = $role->name;
+                    $permissionName = $permission->name;
+                    $permissionId = $permission->id;
 
-                // Check if the role is already in the array
-                if (isset($dataArray[$roleName])) {
-                    // If the role exists, add the permission to its array
-                    $dataArray[$roleName]['permissions'][] = $permissionName;
-                    // $dataArray[$roleName]['permissionsId'][] = $permissionId;
-                } else {
-                    // If the role doesn't exist, create a new entry
-                    $dataArray[$roleName] = [
-                        'role_id' => $roleId,
-                        'roleName' => $roleName,
-                        'permissions' => [$permissionName],
-                        // 'permissions_id' => [$permissionId],
-                    ];
+                    // Check if the role is already in the array
+                    if (isset($dataArray[$roleName])) {
+                        // If the role exists, add the permission to its array
+                        $dataArray[$roleName]['permissions'][] = $permissionName;
+                        // $dataArray[$roleName]['permissionsId'][] = $permissionId;
+                    } else {
+                        // If the role doesn't exist, create a new entry
+                        $dataArray[$roleName] = [
+                            'role_id' => $roleId,
+                            'roleName' => $roleName,
+                            'permissions' => [$permissionName],
+                            // 'permissions_id' => [$permissionId],
+                        ];
+                    }
                 }
             }
+
+            $dataArray = array_values($dataArray);
+            return view('role_in_permission/list',compact('dataArray'));
         }
 
-        $dataArray = array_values($dataArray);
-        return view('role_in_permission/list',compact('dataArray'));
-    }
+        public function rolePermissionAdd(){
+            $roles = Role::all();
+            $perimissions = Permission::all();
+            return view('role_in_permission/addEdit',compact('roles','perimissions'));
+        }
 
-    public function rolePermissionAdd(){
-        $roles = Role::all();
-        $perimissions = Permission::all();
-        return view('role_in_permission/addEdit',compact('roles','perimissions'));
-    }
+        public function rolePermissionEdit($id){
+            $roles = Role::all();
+            $perimissions = Permission::all();
+            $roleHasPermission = RoleHasPermission::where('role_id',$id)->get();
 
-    public function rolePermissionEdit($id){
-        $roles = Role::all();
-        $perimissions = Permission::all();
-        $roleHasPermission = RoleHasPermission::where('role_id',$id)->get();
+            $dataArray = array();
+            // $roleHasPermission = RoleHasPermission::get();
 
-        $dataArray = array();
-        // $roleHasPermission = RoleHasPermission::get();
+            foreach ($roleHasPermission as $key => $val) {
+                $role = Role::where('id', $val->role_id)->first();
+                $permission = Permission::where('id', $val->permission_id)->first();
 
-        foreach ($roleHasPermission as $key => $val) {
-            $role = Role::where('id', $val->role_id)->first();
-            $permission = Permission::where('id', $val->permission_id)->first();
+                if ($role && $permission) {
+                    $roleId = $role->id;
+                    $roleName = $role->name;
+                    $permissionName = $permission->name;
+                    $permissionId = $permission->id;
 
-            if ($role && $permission) {
-                $roleId = $role->id;
-                $roleName = $role->name;
-                $permissionName = $permission->name;
-                $permissionId = $permission->id;
-
-                // Check if the role is already in the array
-                if (isset($dataArray[$roleName])) {
-                    // If the role exists, add the permission to its array
-                    $dataArray[$roleName]['permissions'][] = $permissionName;
-                    // $dataArray[$roleName]['permissionsId'][] = $permissionId;
-                } else {
-                    // If the role doesn't exist, create a new entry
-                    $dataArray[$roleName] = [
-                        'role_id' => $roleId,
-                        'roleName' => $roleName,
-                        'permissions' => [$permissionName],
-                        // 'permissions_id' => [$permissionId],
-                    ];
+                    // Check if the role is already in the array
+                    if (isset($dataArray[$roleName])) {
+                        // If the role exists, add the permission to its array
+                        $dataArray[$roleName]['permissions'][] = $permissionName;
+                        // $dataArray[$roleName]['permissionsId'][] = $permissionId;
+                    } else {
+                        // If the role doesn't exist, create a new entry
+                        $dataArray[$roleName] = [
+                            'role_id' => $roleId,
+                            'roleName' => $roleName,
+                            'permissions' => [$permissionName],
+                            // 'permissions_id' => [$permissionId],
+                        ];
+                    }
                 }
             }
+
+            $dataArray = array_values($dataArray);
+
+            // dd($dataArray);
+            return view('role_in_permission/addEdit',compact('roles','perimissions','dataArray'));
         }
 
-        $dataArray = array_values($dataArray);
-
-        // dd($dataArray);
-        return view('role_in_permission/addEdit',compact('roles','perimissions','dataArray'));
-    }
-
-    public function rolePermissionSave(Request $request){
-        // dd($request->all());
-        try{
-            if (!empty($request->id)) {
-                $role = RoleHasPermission::where('role_id',$request->id);
-                $role->delete();
-                $data = array();
-                $perimissions = $request->permission;
-                foreach($perimissions as $key=>$val){
-                    $data['role_id']= $request->role;
-                    $data['permission_id'] = $val;
-                    $save = RoleHasPermission::create($data);
-                    
+        public function rolePermissionSave(Request $request){
+            // dd($request->all());
+            try{
+                if (!empty($request->id)) {
+                    $role = RoleHasPermission::where('role_id',$request->id);
+                    $role->delete();
+                    $data = array();
+                    $perimissions = $request->permission;
+                    foreach($perimissions as $key=>$val){
+                        $data['role_id']= $request->role;
+                        $data['permission_id'] = $val;
+                        $save = RoleHasPermission::create($data);
+                        
+                    }
+                    toast('Record has been updated!', 'success');
+                
+                } else {    
+                    $data = array();
+                    $perimissions = $request->permission;
+                    foreach($perimissions as $key=>$val){
+                        $data['role_id']= $request->role;
+                        $data['permission_id'] = $val;
+                        $save = RoleHasPermission::create($data);
+                        
+                    }
+                    // $role = Role::create(['name' => $request->role_name ]);
+                    toast('Permissions are added in role!', 'success');
                 }
-                toast('Record has been updated!', 'success');
-            
-            } else {    
-                $data = array();
-                $perimissions = $request->permission;
-                foreach($perimissions as $key=>$val){
-                    $data['role_id']= $request->role;
-                    $data['permission_id'] = $val;
-                    $save = RoleHasPermission::create($data);
-                    
-                }
-                // $role = Role::create(['name' => $request->role_name ]);
-                toast('Permissions are added in role!', 'success');
+                return redirect()->route('rolePermissionList');
             }
-            return redirect()->route('rolePermissionList');
+            catch(Exception $e){
+                Alert::error('Error','Please check, you have already added permissions for the same role.');
+                return back();
+            }
+        
         }
-        catch(Exception $e){
-            Alert::error('Error','Please check, you have already added permissions for the same role.');
-            return back();
-        }
-       
-    }
 
-    public function rolePermissionDelete(Request $request){
-        $role = RoleHasPermission::where('role_id',$request->id);
-        $role->delete();
-    }
-//====================== / Role ===================================
+        public function rolePermissionDelete(Request $request){
+            $role = RoleHasPermission::where('role_id',$request->id);
+            $role->delete();
+        }
+    //====================== / Role ===================================
 
 
 }

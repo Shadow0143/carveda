@@ -16,6 +16,11 @@ use Illuminate\Support\Carbon;
 
 class welcomeController extends Controller
 {
+
+        public function notFound(){
+            return view('notFound');
+        }
+
         public function welcome(){
             $testimonials = Testimonial::select('name','designation','image','text','title','rating')->orderBy('id','DESC')->where('status',true)->get();
             $serviceCategory = Category::orderBy('id','DESC')->where('type','service')->where('status',true)->take(10)->get();

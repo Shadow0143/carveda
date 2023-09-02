@@ -30,7 +30,7 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         // dd($user);
-    if ( $user->role==0 ) {// do your magic here
+    if ( $user->role==0 && $user->role==1  ) {// do your magic here
         return redirect()->route('home');
     }
 
