@@ -15,15 +15,24 @@
                 @csrf
                 @if(!empty($services))
                 <input type="hidden" name="id" id="id" value="{{ $services->id }}">
+                <input type="hidden" name="carId" id="carId" value="{{ $services->car }}">
                 @endif
 
                 <div class="mb-3">
                     <label class="form-label" for="basic-icon-default-fullname">Type <span
                             class="text-danger">*</span></label>
                     <div class="input-group input-group-merge">
-                        <input type="radio" name="type" id="type" value="premium" required>&nbsp; Premium &nbsp; &nbsp;
+                        <input type="radio" name="type" id="type" value="premium" required @if(!empty($services))
+                            @if($services->type == 'premium')
+                        checked
+                        @endif
+                        @endif>&nbsp; Premium &nbsp; &nbsp;
                         &nbsp;
-                        <input type="radio" name="type" id="type" value="normal" required>&nbsp; Normal
+                        <input type="radio" name="type" id="type" value="normal" required @if(!empty($services))
+                            @if($services->type == 'normal')
+                        checked
+                        @endif
+                        @endif>&nbsp; Normal
                     </div>
                 </div>
 
@@ -36,8 +45,10 @@
                         <select name="brand" id="brand" class="form-control" required>
                             <option value=""> --- Please Select Brand --- </option>
                             @foreach ($brandCategory as $key=>$val)
-                            <option value="{{ $val->id }}" @if(!empty($services)) @if ($val->id === $services->cat_id)
-                                selected @endif @endif >{{ $val->title }}</option>
+                            <option value="{{ $val->id }}" @if(!empty($services)) @if ($val->id == $services->brand)
+                                selected
+                                @endif
+                                @endif >{{ $val->title }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -163,5 +174,52 @@
 @endsection
 
 @section('js')
+<script>
+    $(document).ready(function () {
+        var value = $('#brand').val();
+        var carId = $('#carId').val();
+        var url = '/admin/find-car/' + value;
+    
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: function (res) {
+                var selectElement = $('#car');
+                selectElement.empty();
+                for (var i = 0; i < res.length; i++) {
+                    var option = $('<option>');
+                    option.val(res[i].id);
+                    option.text(res[i].car_name);
+                    if (res[i].id == carId) {
+                        option.prop('selected', true);
+                    }
+    
+                    selectElement.append(option);
+                }
+            }
+        });
+    });
+    
+    $('#brand').on('change', function () {
+        var value = $(this).val();
+        var url = '/admin/find-car/'+ value;
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: function (res) {
+                var selectElement = $('#car'); 
+                selectElement.empty();
+    
+                // Loop through the response data and create option elements
+                for (var i = 0; i < res.length; i++) {
+                    var option = $('<option>');
+                    option.val(res[i].id);
+                    option.text(res[i].car_name);
+                    selectElement.append(option);
+                }
+            }
+        });
+    });
+</script>
 
 @endsection

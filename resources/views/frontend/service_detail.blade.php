@@ -47,30 +47,34 @@
 
             <div class="col-xl-12">
                 <div class="iv_listing mt-5 mt-xl-0">
-                    <div
-                        class="iv_listing_top d-flex flex-wrap align-items-center bg-white justify-content-center justify-content-sm-between rounded mb-4">
-                        <div class="iv_listing_filter_menu d-flex flex-wrap align-items-center justify-content-center">
-                            <p class="mb-0 flex-shrink-0 fw-semibold">Brand:</p>
-                            <select class="form-select fw-500">
-                                <option>Newest First</option>
-                                <option>Most Popular</option>
-                                <option>Most Rated</option>
-                            </select>
+                    <form action="{{ route('searchservices') }}" method="post">
+                        @csrf
+                        <div
+                            class="iv_listing_top d-flex flex-wrap align-items-center bg-white justify-content-center justify-content-sm-between rounded mb-4">
+                            <div
+                                class="iv_listing_filter_menu d-flex flex-wrap align-items-center justify-content-center">
+                                <p class="mb-0 flex-shrink-0 fw-semibold">Brand:</p>
+                                <select class="form-select fw-500" id="brandId" name="brandId">
+                                    <option> --- Select Brand --- </option>
+                                    @foreach($brandName as $key => $value)
+                                    <option value="{{ $value->id }}">{{ $value->title }}</option>
+                                    @endforeach
+                                </select>
 
-                            <p class="mb-0 flex-shrink-0 fw-semibold">Car:</p>
-                            <select class="form-select fw-500">
-                                <option>Newest First</option>
-                                <option>Most Popular</option>
-                                <option>Most Rated</option>
-                            </select>
-                            <div class="form-btns d-flex align-items-center">
-                                <a href="#" class="btn btn-primary">Submit<span class="ms-2"><i
-                                            class="fa-solid fa-arrow-right"></i></span></a>
+                                <p class="mb-0 flex-shrink-0 fw-semibold">Car:</p>
+                                <select class="form-select fw-500" id="car" name="car">
+                                    <option> --- Select Car --- </option>
 
+                                </select>
+                                <div class="form-btns d-flex align-items-center">
+                                    <button type="submit" class="btn btn-primary">Submit<span class="ms-2"><i
+                                                class="fa-solid fa-arrow-right"></i></span></button>
+
+                                </div>
                             </div>
-                        </div>
 
-                    </div>
+                        </div>
+                    </form>
                     <div class="row g-4 justify-content-center">
 
 
@@ -84,7 +88,9 @@
                                 </div>
                                 <div class="listing_card_content ms-lg-4 mt-4 mt-lg-0">
                                     <a href="#">
-                                        <h5 class="mb-1">{{ $service->title }}</h5>
+                                        <h5 class="mb-1">{{ $service->title }} ({{ $service->brand_name}} - {{
+                                            $service->car_name }}) <span class="text-danger">({{
+                                                ucfirst($service->type) }})</span></h5>
                                     </a>
                                     <p class="mt-3 mb-4 pera-text-2">{{$service->shortdescription}}</p>
                                     <div class="card-feature-box d-flex flex-wrap align-items-center">
@@ -116,4 +122,52 @@
         </div>
 </section>
 <!--service details end-->
+@endsection
+
+@section('js')
+<script>
+    $(document).ready(function () {
+        var value = $('#brandId').val();
+        var carId = $('#carId').val();
+        var url = '/find-car-filter/' + value;
+    
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: function (res) {
+                var selectElement = $('#car');
+                selectElement.empty();
+                for (var i = 0; i < res.length; i++) {
+                    var option = $('<option>');
+                    option.val(res[i].id);
+                    option.text(res[i].car_name);
+                    if (res[i].id == carId) {
+                        option.prop('selected', true);
+                    }
+    
+                    selectElement.append(option);
+                }
+            }
+        });
+    });
+        
+    $('#brandId').on('change', function () {
+        var value = $(this).val();
+        var url = '/find-car-filter/' + value;
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: function (res) {
+                var selectElement = $('#car'); 
+                selectElement.empty();
+                for (var i = 0; i < res.length; i++) {
+                    var option = $('<option>');
+                    option.val(res[i].id);
+                    option.text(res[i].car_name);
+                    selectElement.append(option);
+                }
+            }
+        });
+    });
+</script>
 @endsection

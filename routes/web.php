@@ -20,6 +20,7 @@ Route::get('/', [App\Http\Controllers\welcomeController::class, 'welcome'])->nam
 Route::get('/contact', [App\Http\Controllers\welcomeController::class, 'contact'])->name('contact');
 Route::get('/services', [App\Http\Controllers\welcomeController::class, 'services'])->name('services');
 Route::get('/service-details/{slug}', [App\Http\Controllers\welcomeController::class, 'servicesDetails'])->name('servicesDetails');
+Route::get('/service-type/{slug}', [App\Http\Controllers\welcomeController::class, 'servicesType'])->name('servicesType');
 Route::get('/blogs', [App\Http\Controllers\welcomeController::class, 'blogs'])->name('blogs');
 Route::get('/blogs-details/{id}', [App\Http\Controllers\welcomeController::class, 'blogDetails'])->name('blogDetails');
 Route::get('/blogs/{slug}', [App\Http\Controllers\welcomeController::class, 'blogwithCategory'])->name('blogwithCategory');
@@ -28,6 +29,9 @@ Route::get('/work', [App\Http\Controllers\welcomeController::class, 'work'])->na
 Route::get('/work-detail/{id}', [App\Http\Controllers\welcomeController::class, 'workDeails'])->name('workDeails');
 Route::post('/submit-contact', [App\Http\Controllers\welcomeController::class, 'submitContact'])->name('submitContact');
 Route::post('/submit-subscribe', [App\Http\Controllers\welcomeController::class, 'subscribe'])->name('subscribe');
+Route::get('/find-car-filter/{id}', [App\Http\Controllers\welcomeController::class, 'findCarsFilter'])->name('findCarsFilter');
+Route::post('/blogs', [App\Http\Controllers\welcomeController::class, 'searchBlogs'])->name('searchBlogs');
+Route::post('/services', [App\Http\Controllers\welcomeController::class, 'searchservices'])->name('searchservices');
 
 
 
@@ -75,6 +79,8 @@ Route::prefix('admin')->middleware('adminCheck')->group(function () {
         Route::get('/service-edit/{id}', [App\Http\Controllers\HomeController::class, 'servicesEdit'])->name('servicesEdit')->middleware('permission:Services');
         Route::post('/service-save', [App\Http\Controllers\HomeController::class, 'servicesSave'])->name('servicesSave')->middleware('permission:Services');
         Route::get('/service-delete', [App\Http\Controllers\HomeController::class, 'servicesDelete'])->name('servicesDelete')->middleware('permission:Services'); 
+        Route::get('/find-car/{id}', [App\Http\Controllers\HomeController::class, 'findCars'])->name('findCars')->middleware('permission:Services'); 
+
 
     //========================= / Service ================================
 

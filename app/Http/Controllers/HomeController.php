@@ -167,13 +167,16 @@ class HomeController extends Controller
         }
     //====================== / About Me ===================================
 
-
     //====================== Services ===================================
         public function servicesList(){
             $services = Service::orderBy('id', 'desc')->paginate(10);
             foreach($services as $key=>$val){
                 $category = Category::select('title')->where('type','service')->where('id',$val->cat_id)->first();
+                $brand = Category::select('title')->where('type','brand')->where('id',$val->brand)->first();
+                $cars = Car::select('car_name')->where('id',$val->car)->first();
                 $services[$key]->category_name = $category->title;
+                $services[$key]->brand_name = $brand->title;
+                $services[$key]->car_name = $cars->car_name;
             }
 
             return view('service/list',compact('services'));
@@ -189,7 +192,6 @@ class HomeController extends Controller
             $services = Service::find($id);
             $serviceCategory = Category::orderBy('id','DESC')->where('type','service')->where('status',true)->get();
             $brandCategory = Category::orderBy('id','DESC')->where('type','brand')->where('status',true)->get();
-
             return view('service/addedit',compact('services','serviceCategory','brandCategory'));
         }
 
@@ -197,14 +199,14 @@ class HomeController extends Controller
             // dd($request->all());
             if (!empty($request->id)) {
                 $service = Service::find($request->id);
-                $service->cat_id = $request->category;
                 $service->type = $request->type;
                 $service->brand = $request->brand;
                 $service->car = $request->car;
+                $service->cat_id = $request->category;
                 $service->title = $request->title;
-                $service->shortdescription = $request->description;
                 $service->start_price = $request->start_price;
                 $service->end_price = $request->end_price;
+                $service->shortdescription = $request->description;
                 $service->status = $request->status;
                 if ($request->hasfile('image')) {
                     $image = $request->file('image');
@@ -219,14 +221,14 @@ class HomeController extends Controller
             
             } else {    
                 $service = new Service();
-                $service->cat_id = $request->category;
                 $service->type = $request->type;
                 $service->brand = $request->brand;
                 $service->car = $request->car;
+                $service->cat_id = $request->category;
                 $service->title = $request->title;
-                $service->shortdescription = $request->description;
                 $service->start_price = $request->start_price;
                 $service->end_price = $request->end_price;
+                $service->shortdescription = $request->description;
                 $service->status = $request->status;
                 if ($request->hasfile('image')) {
                     $image = $request->file('image');
@@ -245,6 +247,12 @@ class HomeController extends Controller
         public function servicesDelete(Request $request){
             $package = Service::find($request->id);
             $package->delete();
+        }
+
+        public function findCars($id){
+            $cars = Car::where('brand_id',$id)->get();
+            // dd($cars);
+            return $cars;
         }
     //====================== / Services ===================================
 

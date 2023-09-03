@@ -11,6 +11,7 @@ use App\Models\Works;
 use App\Models\Blog;
 use App\Models\Subscribe;
 use App\Models\Category;
+use App\Models\Car;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Carbon;
 
@@ -39,7 +40,8 @@ class welcomeController extends Controller
         }
 
         public function contact(){
-            return view('frontend/contact');
+            $contactService = Category::select('title')->where('type','contact')->get();
+            return view('frontend/contact',compact('contactService'));
         }
 
         public function services(){
@@ -53,12 +55,51 @@ class welcomeController extends Controller
             $services = Service::orderBy('id', 'desc')->where('cat_id',$category_id->id)->paginate(10);
             foreach($services as $key=>$val){
                 $category = Category::select('title')->where('type','service')->where('id',$val->cat_id)->first();
+                $brand = Category::select('title')->where('type','brand')->where('id',$val->brand)->first();
+                $cars = Car::select('car_name')->where('id',$val->car)->first();
+                $services[$key]->brand_name = $brand->title;
+                $services[$key]->car_name = $cars->car_name;
+                $services[$key]->category_name = $category->title;
+            }
+            $brandName = Category::select('id','title')->where('type','brand')->get();
+
+            return view('frontend/service_detail',compact('services','brandName'));
+        }
+
+        public function searchservices(Request $req){
+            $services = Service::orderBy('id', 'desc')->where('car',$req->car)->where('brand',$req->brandId)->paginate(30);
+            foreach($services as $key=>$val){
+                $category = Category::select('title')->where('type','service')->where('id',$val->cat_id)->first();
+                $brand = Category::select('title')->where('type','brand')->where('id',$val->brand)->first();
+                $cars = Car::select('car_name')->where('id',$val->car)->first();
+                $services[$key]->brand_name = $brand->title;
+                $services[$key]->car_name = $cars->car_name;
+                $services[$key]->category_name = $category->title;
+            }
+            $brandName = Category::select('id','title')->where('type','brand')->get();
+
+            return view('frontend/service_detail',compact('services','brandName'));
+        }
+
+        public function findCarsFilter($id){
+            $cars = Car::where('brand_id',$id)->get();
+            return $cars;
+        }
+
+        public function servicesType($slug){
+            $services = Service::orderBy('id', 'desc')->where('type',$slug)->paginate(20);
+            foreach($services as $key=>$val){
+                $category = Category::select('title')->where('type','service')->where('id',$val->cat_id)->first();
+                $brand = Category::select('title')->where('type','brand')->where('id',$val->brand)->first();
+                $cars = Car::select('car_name')->where('id',$val->car)->first();
+                $services[$key]->brand_name = $brand->title;
+                $services[$key]->car_name = $cars->car_name;
                 $services[$key]->category_name = $category->title;
             }
             // dd($services);
             return view('frontend/service_detail',compact('services'));
         }
-
+   
         public function blogs(){
             $blogCategory = Category::orderBy('id','DESC')->where('type','blog')->where('status',true)->get();
             foreach($blogCategory as $key=>$cat){
@@ -107,6 +148,26 @@ class welcomeController extends Controller
             }
             $popular = Blog::orderBy('id','DESC')->where('status',true)->take(15)->get();
             return view('frontend/blogwithcategory',compact('blogs','popular','blogCategory'));
+        }
+
+        public function searchBlogs(Request $request){
+            // dd($request->all());
+
+            $blogCategory = Category::orderBy('id','DESC')->where('type','blog')->where('status',true)->get();
+            foreach($blogCategory as $key=>$cat){
+            $count = Blog::where('category',$cat->id)->count();
+            $blogCategory[$key]->count = $count; 
+            }
+           
+            $blogs = Blog::orderBy('id','DESC')->where('status',true)->where('title', 'like', '%' . $request->searchKey . '%')->paginate(30);
+            foreach($blogs as $key=>$val){
+                $category = Category::select('title')->where('type','blog')->where('id',$val->category)->first();
+                $blogs[$key]->category_name = $category->title;
+            }
+
+            $popular = Blog::orderBy('id','DESC')->where('status',true)->take(15)->get();
+            return view('frontend/blog',compact('blogs','popular','blogCategory'));
+
         }
 
         public function aboutUs(){

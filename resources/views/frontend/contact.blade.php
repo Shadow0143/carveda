@@ -63,8 +63,10 @@
                                     <label class="fw-semibold text-secondary mb-1">Service</label>
                                     <select class="form-select" name="services">
                                         <option value="">Select Service</option>
-                                        <option value="Dealership">Car Dealership</option>
-                                        <option value="Rental">Car Rental</option>
+                                        @foreach ($contactService as $key=>$val )
+                                        <option value="{{ $val->title }}">{{ $val->title }}</option>
+                                        @endforeach
+
                                     </select>
                                 </div>
                             </div>

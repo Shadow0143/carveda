@@ -68,7 +68,8 @@
                                 <span class="icon-wrapper d-flex align-items-center justify-content-center rounded"><i
                                         class="flaticon-search"></i></span>
                                 <h3 class="text-white mt-3 mb-20">Premium</h3>
-                                <a href="inventory-listing.html" class="at-explore-btn text-white">
+                                <a href="{{ route('servicesType',['slug'=>'premium']) }}"
+                                    class="at-explore-btn text-white">
                                     <span class="me-2 text-white"><svg width="39" height="26" viewBox="0 0 39 26"
                                             fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -100,7 +101,8 @@
                                         class="icon-wrapper d-flex align-items-center justify-content-center rounded"><i
                                             class="flaticon-search"></i></span>
                                     <h3 class="text-white mt-3 mb-20">Premium</h3>
-                                    <a href="inventory-listing.html" class="at-explore-btn text-white">
+                                    <a href="{{ route('servicesType',['slug'=>'premium']) }}"
+                                        class="at-explore-btn text-white">
                                         <span class="me-2 text-white"><svg width="39" height="26" viewBox="0 0 39 26"
                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path
@@ -135,7 +137,8 @@
                                 <span class="icon-wrapper d-flex align-items-center justify-content-center rounded"><i
                                         class="flaticon-budget"></i></span>
                                 <h3 class="text-white mt-3 mb-20">Normal</h3>
-                                <a href="car-listing.html" class="at-explore-btn text-white">
+                                <a href="{{ route('servicesType',['slug'=>'normal']) }}"
+                                    class="at-explore-btn text-white">
                                     <span class="me-2 text-white">
                                         <svg width="39" height="26" viewBox="0 0 39 26" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -166,7 +169,8 @@
                                         class="icon-wrapper d-flex align-items-center justify-content-center rounded"><i
                                             class="flaticon-budget"></i></span>
                                     <h3 class="text-white mt-3 mb-20">Normal</h3>
-                                    <a href="car-listing.html" class="at-explore-btn text-white">
+                                    <a href="{{ route('servicesType',['slug'=>'normal']) }}"
+                                        class="at-explore-btn text-white">
                                         <span class="me-2 text-white">
                                             <svg width="39" height="26" viewBox="0 0 39 26" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">

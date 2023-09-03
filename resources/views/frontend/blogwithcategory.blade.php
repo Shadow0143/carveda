@@ -121,8 +121,10 @@
             <div class="col-xl-4">
                 <div class="blog-sidebar mt-60 mt-xl-0">
                     <div class="sidebar-widget tmg-search-widget bg-white widget-padding rounded">
-                        <form class="d-flex align-items-center justify-content-between" action="#">
-                            <input type="text" placeholder="Search...">
+                        <form class="d-flex align-items-center justify-content-between"
+                            action="{{ route('searchBlogs') }}" method="post">
+                            @csrf
+                            <input type="text" placeholder="Search..." name="searchKey">
                             <button type="submit" class="btn btn-primary"><i
                                     class="fa-solid fa-magnifying-glass"></i></button>
                         </form>

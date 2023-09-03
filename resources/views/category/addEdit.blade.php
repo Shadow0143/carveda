@@ -30,6 +30,8 @@
                                 @endif >Services</option>
                             <option value="blog" @if(!empty($category) && $category->type == 'blog') selected
                                 @endif >Blogs</option>
+                            <option value="contact" @if(!empty($category) && $category->type == 'contact') selected
+                                @endif >Contact us Service</option>
                         </select>
                     </div>
                 </div>

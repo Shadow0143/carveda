@@ -63,12 +63,24 @@
                     <div class="md-nav-wrapper d-flex align-items-center justify-content-end">
                         <nav class="at_nav_menu d-none d-xl-block md_menu_list">
                             <ul>
-                                <li><a href="{{ route('welcome') }}" class="active">Home</a></li>
-                                <li><a href="{{ route('services') }}">Service</a></li>
-                                <li><a href="{{ route('blogs') }}">Blog</a></li>
-                                <li><a href="{{ route('work') }}">Work</a></li>
-                                <li><a href="{{ route('aboutUs') }}">About Us</a></li>
-                                <li><a href="{{ route('contact') }}">Contact Us</a></li>
+                                <li><a href="{{ route('welcome') }}"
+                                        class="@if( Route::currentRouteName() == 'welcome' ) active @endif">Home</a>
+                                </li>
+                                <li><a href="{{ route('services') }}"
+                                        class="@if( Route::currentRouteName() == 'services' ) active @endif">Service</a>
+                                </li>
+                                <li><a href="{{ route('blogs') }}"
+                                        class="@if( Route::currentRouteName() == 'blogs' ) active @endif">Blog</a>
+                                </li>
+                                <li><a href="{{ route('work') }}"
+                                        class="@if( Route::currentRouteName() == 'work' ) active @endif">Work</a>
+                                </li>
+                                <li><a href="{{ route('aboutUs') }}"
+                                        class="@if( Route::currentRouteName() == 'aboutUs' ) active @endif">About
+                                        Us</a></li>
+                                <li><a href="{{ route('contact') }}"
+                                        class="@if( Route::currentRouteName() == 'contact' ) active @endif">Contact
+                                        Us</a></li>
                             </ul>
                         </nav>
 

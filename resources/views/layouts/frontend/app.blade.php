@@ -79,7 +79,12 @@
     <script src="{{ asset('frontend/assets/js/vendors/price-range.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/vendors/image-rotate.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/app.js') }}"></script>
-    <!--endbuild-->
+
+
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
+    @yield('js')
 </body>
 
 </html>

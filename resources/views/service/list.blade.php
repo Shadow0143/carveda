@@ -32,9 +32,9 @@
                     @forelse($services as $key => $value)
                     <tr id="willremove{{ $value->id }}" class="table-primary text-center">
                         <td>{{ ucfirst($value->category_name) }}</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{{ ucfirst($value->type) }}</td>
+                        <td>{{ $value->brand_name }}</td>
+                        <td>{{ $value->car_name }}</td>
 
 
                         <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{ $value->title }}</strong>
